@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, defineCollection, s } from 'velite';
+import { defineCollection, defineConfig, s } from 'velite';
 
 const docSchema = s
   .object({
@@ -8,6 +8,7 @@ const docSchema = s
     path: s.path(),
     published: s.boolean().default(true),
     order: s.number().optional(),
+    hideFromSidebar: s.boolean().default(false),
     toc: s.toc(),
   })
   .transform((data) => {
@@ -81,6 +82,12 @@ const troubleshooting = defineCollection({
   schema: docSchema,
 });
 
+const changelog = defineCollection({
+  name: 'changelog',
+  pattern: './changelog.md',
+  schema: docSchema,
+});
+
 export default defineConfig({
   root: './docs',
   collections: {
@@ -94,6 +101,7 @@ export default defineConfig({
     guides,
     helpingOut,
     troubleshooting,
+    changelog,
   },
   output: {
     assets: 'static',

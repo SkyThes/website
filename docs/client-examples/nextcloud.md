@@ -16,7 +16,7 @@ The following example variables are used and should be replaced with your actual
 2. Set a logo for this OIDC Client if you would like to.
 3. Set the callback URL to: `https://nextcloud.example.com/apps/user_oidc/code`.
 4. Set the Logout Callback URLs to the address the nextcloud/user_oidc plugin will give you. For most of the time it will be the address below with the portion `PocketID` being the name you gave to it on Nextcloud. e.g:`https://nextcloud.example.com/apps/user_oidc/backchannel-logout/PocketID`.
-5. Leave `Public Client` and `PKCE` unchecked.
+5. Leave `Public Client` unchecked. Consider enabling `PKCE`.
 6. Copy the `Client ID`, `Client Secret`, `OIDC Discovery URL` and `Logout URL` for use in the next steps.
 
 ## Nextcloud Setup
@@ -31,7 +31,7 @@ The following example variables are used and should be replaced with your actual
    3. `Client secret` -> `Client Secret` from Pocket ID
    4. `Discovery endpoint` -> `OIDC Discovery URL`from Pocket ID
    5. `Custom end session endpoint`-> `Logout URL`from Pocket ID
-   6. `Scope` -> openid email profile
+   6. `Scope` -> `openid email profile groups`
    7. By default, Nextcloud will create a new user when logging in using Pocket ID. If you want to log in with an existing Nextcloud user, you need to tell Nextcloud how to match Pocket ID users with Nextcloud users. You can either:
       - Match accounts using a custom claim: `User ID mapping` -> nextcloud_username
 
@@ -41,8 +41,10 @@ The following example variables are used and should be replaced with your actual
 
         (if `Enable Self-Account Editing` is enabled, Pocket ID users are allowed to change their own username and therefore chose the Nextcloud account they log into!)
 
-   8. (Optional) Check `Use group provisioning`if you want Pocket ID groups to be replicated on Nextcloud
-   9. `Use unique user ID` -> Checked, `Send ID token hint on logout` -> Unchecked
+   8. (Optional) Open <i>Extra-Attribute-Mapping</i> and set <i>Avatar-Mapping</i> to `picture`. This downloads the Profilpicture from PocketID
+   9. (Optional) Check `Use group provisioning`if you want Pocket ID groups to be replicated on Nextcloud
+   10. (Optional) If you're using groups you can whitelist them using <i>Group-Whitelist-Regex</i> -> `^(nextcloud_(admins|users))$`. This Regex will look for both groups <i>nextcloud_admins</i> and <i>nextcloud_users</i>. By enabling the next point <i>User Login only matching Whitelist-Regex</i> only users in this groups will have access.
+   11. `Use unique user ID` -> Checked, `Send ID token hint on logout` -> Unchecked
 
 6. After the creation of the Provider, make sure `Backchannel Logout URL` and `Redirect URI` matches the setting on Pocket ID.
 

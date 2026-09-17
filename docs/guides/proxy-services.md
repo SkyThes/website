@@ -18,7 +18,7 @@ We would really appreciate your contributions to this documentation, whether by 
 
 [Tinyauth](https://tinyauth.app/) is a lightweight authentication middleware designed specifically for homelabs. Currently it integrates with Traefik, Caddy and Nginx Proxy Manager.
 
-Refer to the official [Tinyauth Pocket ID documentation](https://tinyauth.app/docs/guides/pocket-id.html) for detailed instructions on how to set up Tinyauth with Pocket ID.
+Refer to the official [Tinyauth Pocket ID documentation](https://tinyauth.app/docs/guides/pocket-id) for detailed instructions on how to set up Tinyauth with Pocket ID.
 
 ## Caddy
 
@@ -53,8 +53,8 @@ caddy add-package github.com/greenpau/caddy-security
 			client_id client-id-from-pocket-id # Replace with your own client ID
 			client_secret client-secret-from-pocket-id # Replace with your own client secret
 			scopes openid email profile
-			base_auth_url http://localhost
-			metadata_url http://localhost/.well-known/openid-configuration
+			base_auth_url https://<domain-where-pocket-id-runs> #Replace
+			metadata_url https://<domain-where-pocket-id-runs>/.well-known/openid-configuration #Replace
 		}
 
 		authentication portal myportal {
@@ -62,6 +62,7 @@ caddy add-package github.com/greenpau/caddy-security
 			enable identity provider generic
 			cookie insecure off # Set to "on" if you're not using HTTPS
 			# cookie domain service.example.com - If using multiple clients/portals you have to set the cookie domain for each one so they do not conflict when trying to refresh the session.
+			trust login redirect uri domain exact service.example.com path prefix /
 
 			transform user {
 				match realm generic
@@ -192,8 +193,18 @@ You can visit the official [OAuth2 Proxy documentation](https://oauth2-proxy.git
 
 ## Traefik
 
-[Traefik](https://traefik.io/traefik/) does not have built-in support for OIDC, but there are many [plugins](https://plugins.traefik.io/plugins) available that add support.
+[Traefik](https://traefik.io/traefik/) does not have built-in support for OpenID Connect, but can be integrated in two ways.
+
+Note: Traefik Enterprise has an [OIDC middleware](https://doc.traefik.io/traefik-enterprise/middlewares/oidc/) out of the box if you happen to be using that.
+
+### Using forward auth
+
+Using forward auth, for example with [traefik-forward-auth v4](https://github.com/ItalyPaleAle/traefik-forward-auth), involves running a separate service alongside Traefik (as a "sidecar" configured in the Docker Compose file or Pod spec). Traefik invokes the forward auth service behind the scenes to authorize requests, redirecting the user to it if it needs to authenticate. traefik-forward-auth v4 includes support for Pocket ID and other authentication providers.
+
+See the documentation for [configuring traefik-forward-auth](https://traefik-forward-auth.italypaleale.me/docs/quickstart/) and [integrating it](https://traefik-forward-auth.italypaleale.me/providers/pocket-id/) with Pocket ID.
+
+### Using a Traefik plugin
+
+Traefik includes experimental support for plugins that run in-process.
 
 [Traefik OpenID Connect Middleware](https://plugins.traefik.io/plugins/66b63d12d29fd1c421b503f5/oidc-authentication) works with Pocket ID. See the [Pocket ID configuration docs](https://traefik-oidc-auth.sevensolutions.cc/docs/identity-providers/pocket-id) for Pocket ID specific instructions, and [Getting Started](https://traefik-oidc-auth.sevensolutions.cc/docs/getting-started) for more details on how to apply the configuration to a specific endpoint.
-
-Traefik Enterprise has an [OIDC middleware](https://doc.traefik.io/traefik-enterprise/middlewares/oidc/) out of the box if you happen to be using that. It is similar to configure.

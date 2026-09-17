@@ -12,7 +12,7 @@ Below URLs are used as placeholders for the Grafana and Pocket ID instances. Rep
 
 1. In Pocket ID, create a new OIDC client named `grafana` (or any name you prefer).
 2. (Optional) Set a logo for the OIDC client.
-3. Set the callback URL to: `https://grafana.example.com/login/generic_oauth`
+3. Set the callback URL to: `https://grafana.example.com/login/generic_oauth`.
 4. Copy the `Client ID`, `Client Secret`, `Authorization URL` and `Token URL` for the next steps.
 
 ## Grafana App Setup
@@ -36,6 +36,15 @@ Below URLs are used as placeholders for the Grafana and Pocket ID instances. Rep
 6. Save the settings.
 7. Next create a new admin user or update the existing admin user under the **Users** settings to have the same email address as your user in **Pocket-ID**. Also set the username to the same email id.
 8. Logout and test the OAuth based login.
+
+## Role Mapping
+
+To use group membership to assign roles automatically:
+
+1. Add `groups` to the `Scopes` setting: `openid email profile groups`
+2. Set the `role attribute path` according to the [examples](https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-authentication/generic-oauth/). For example:
+   - `role_attribute_path: contains(groups[*], 'Monitoring Admin') && 'Admin' || contains(groups[*], 'Monitoring') && 'Editor' || 'Viewer'` will grant the "Admin" role to anyone with the "Monitoring Admin" group, the "Editor" role to anyone with the "Monitoring" group, and the "Viewer" role to any other logged-in user.
+3. Logout and back in to update your role.
 
 ## Common problems
 

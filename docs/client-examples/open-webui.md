@@ -4,7 +4,7 @@ description: Configure Open WebUI with Pocket ID authentication
 ---
 
 1. In Pocket-ID, create a new OIDC Client, name it i.e. `Open WebUI`.
-2. Set the callback URL to: `https://openwebui.domain/oauth/oidc/callback`
+2. Set the callback URL to: `https://openwebui.domain/oauth/oidc/callback`.
 3. Optional but recommended - Create a group for users and a group for admins in Pocket-ID. eg: `users` and `admins`
 4. Add the following to your docker `.env` file for Open WebUI:
 
@@ -38,4 +38,4 @@ description: Configure Open WebUI with Pocket ID authentication
 ```
 
 Its recommended you have a separate admin account without oauth in Open WebUI so you don't get locked out when testing the integration.
-[Read more](https://docs.openwebui.com/getting-started/env-configuration#oauth)
+[Read more](https://docs.openwebui.com/reference/env-configuration#oauth)

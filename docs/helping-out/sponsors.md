@@ -6,8 +6,12 @@ description: GitHub Sponsors supporting the project maintainers
 <script>
   import SponsorsGrid from '$lib/components/sponsors-grid.svelte';
   import { Button } from '$lib/components/ui/button/index.js';
+  import JetbrainsLogo from '$lib/components/jetbrains-logo.svelte';
+  import DepotLogo from '$lib/components/depot-logo.svelte';
   const users = ['stonith404', 'kmendell'];
 </script>
+
+## GitHub Sponsors
 
 #### Thanks to everyone who supports Pocket ID by becoming a sponsor!
 
@@ -20,7 +24,7 @@ You truly do not know how much that means to us and how much it helps support th
       target="_blank"
       rel="noreferrer"
       variant="outline"
-      class="inline-flex items-center gap-2 rounded-md border px-3 py-1.5">
+      class="flex items-center gap-2 rounded-md border px-3 py-1.5 w-auto">
       <img class="size-5 rounded-full" src={`https://github.com/${u}.png`} alt={u} />
       <span>Sponsor @{u}</span>
     </Button>
@@ -28,3 +32,42 @@ You truly do not know how much that means to us and how much it helps support th
 </div>
 
 <SponsorsGrid />
+
+## Tools
+
+### JetBrains
+
+Thanks to [JetBrains](https://www.jetbrains.com/) for giving free All Products Pack subscriptions to open source maintainers.
+
+<div class="mt-8 mb-6 flex justify-center">
+  <div class="max-w-3xl w-full flex justify-center">
+    <JetbrainsLogo alt="JetBrains" className="h-20 w-auto rounded-md bg-background p-2 border border-border shadow" />
+  </div>
+</div>
+
+### Depot
+
+Thanks to [Depot](https://depot.dev) for providing fast CI/CD pipelines for free to open source projects.
+
+<div class="mt-8 mb-6 flex justify-center">
+  <div class="max-w-3xl w-full flex justify-center">
+    <DepotLogo alt="Depot" className="h-20 w-auto rounded-md bg-background p-2 border border-border shadow" />
+  </div>
+</div>
+
+### Snyk
+
+Thanks to [Snyk](https://snyk.io) for providing free licenses that help us keep Pocket ID secure.
+
+<div class="mt-8 mb-6 flex justify-center">
+  <a
+    href="https://snyk.io"
+    target="_blank"
+    rel="noreferrer"
+    class="inline-block">
+    <img
+      src="/img/sponsors/snyk-secure-developer-program.png"
+      alt="Snyk Secure Developer Program"
+      class="h-30" />
+  </a>
+</div>
