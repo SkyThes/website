@@ -3,6 +3,22 @@ title: 'Changelog'
 description: 'Release notes for pocket-id'
 ---
 
+## v2.19.1 - 2026-10-22
+
+[Release](https://github.com/pocket-id/pocket-id/releases/tag/v2.19.1)
+
+
+### Bug Fixes
+
+- bump go to v1.27.3, alpine to 3.24.3 and distroless to debian13 ([ec14aa2](https://github.com/pocket-id/pocket-id/commit/ec14aa22af23324f1820adec1e70fb67c5554156) by @kmendell)
+
+### Other
+
+- Bump vite-plus from 1.1.0 to 1.3.0 ([274977c](https://github.com/pocket-id/pocket-id/commit/274977cf733039f280459de46d2de2e596696d2b) by @kmendell)
+
+**Full Changelog**: https://github.com/pocket-id/pocket-id/compare/v2.19.0...v2.19.1
+
+
 ## v2.14.0 - 2026-08-18
 
 [Release](https://github.com/pocket-id/pocket-id/releases/tag/v2.14.0)
